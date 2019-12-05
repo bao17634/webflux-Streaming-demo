@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/quote-stream/produce_io.iml" filepath="$PROJECT_DIR$/quote-stream/produce_io.iml" />
+      <module fileurl="file://$PROJECT_DIR$/streaming-service/streaming-service.iml" filepath="$PROJECT_DIR$/streaming-service/streaming-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/webflux-streaming-showcase.iml" filepath="$PROJECT_DIR$/.idea/webflux-streaming-showcase.iml" />
+    </modules>
+  </component>
+</project>
