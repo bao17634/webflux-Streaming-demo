@@ -4,6 +4,7 @@ package io.byr.kafka.controller;
 import io.byr.kafka.service.SentMessageKafkaService;
 import io.byr.kafka.utils.KafkaUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.producer.KafkaProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,10 +20,11 @@ import java.util.concurrent.ExecutionException;
  * @modified Date：
  * @version: $
  */
-//@RequestMapping(value = "/")
 @RestController
 @Slf4j
 public class ProduceController {
+    @Autowired
+    private KafkaUtil kafkaUtil;
     @Autowired
     private SentMessageKafkaService sentMessageKafkaService;
 
@@ -31,11 +33,11 @@ public class ProduceController {
         try {
             for (int i = 0; i < 1000; i++) {
                 Thread.sleep(1000);
-                String uuid = UUID.randomUUID().toString().replace("-",",");
+                String uuid = UUID.randomUUID().toString().replace("-","");
                 log.info("随机字符串：{}",uuid);
                 sentMessageKafkaService.sentMessage("spark", uuid);
             }
-            KafkaUtil.getProducer().flush();
+            kafkaUtil.getProducer().flush();
         } catch (ExecutionException e) {
             throw new RuntimeException(e);
         } catch (InterruptedException e) {

@@ -25,7 +25,7 @@ public final class JavaDirectKerberizedKafkaWordCount {
 
 //        StreamingExamples.setStreamingLogLevels();
 
-        String brokers = "localhost:9092";
+        String brokers = "192.168.61.128:9092";
         String groupId = "VoucherGroup";
         String topics = "spark";
         // Create context with a 2 seconds batch interval

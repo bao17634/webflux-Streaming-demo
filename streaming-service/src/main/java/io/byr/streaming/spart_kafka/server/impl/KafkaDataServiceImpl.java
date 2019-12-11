@@ -3,6 +3,7 @@ package io.byr.streaming.spart_kafka.server.impl;
 
 import io.byr.streaming.spart_kafka.config.BeanFactoryHelper;
 import io.byr.streaming.spart_kafka.dao.impl.HBaseOperatingDaoImpl;
+import io.byr.streaming.spart_kafka.dao.impl.KuduOperatingDaoImpl;
 import io.byr.streaming.spart_kafka.dao.impl.StreamingDaoImpl;
 import io.byr.streaming.spart_kafka.entity.StreamingWord;
 import lombok.extern.slf4j.Slf4j;
@@ -50,7 +51,7 @@ import java.util.regex.Pattern;
 @Service
 public final class KafkaDataServiceImpl {
     private  String TOPIC;
-    private static final Pattern SPACE = Pattern.compile(",");
+    private static final Pattern SPACE = Pattern.compile("\"[A-Za-z]+\"");
 
 
     public void readKafkaData(String brokers, String groupId, String topics) throws Exception {
@@ -90,8 +91,8 @@ public final class KafkaDataServiceImpl {
 //             要是换成别的，就是换这里的连接操作
             rdd.foreachPartition(partition -> {
                 StreamingWord streamingWord =new StreamingWord();
-//                StreamingDaoImpl mysql= BeanFactoryHelper.getTargetBean("mysql",StreamingDaoImpl.class);
                 HBaseOperatingDaoImpl hbase= BeanFactoryHelper.getTargetBean("HBase",HBaseOperatingDaoImpl.class);
+                KuduOperatingDaoImpl kudu= BeanFactoryHelper.getTargetBean("Kudu",KuduOperatingDaoImpl.class);
                 while (partition.hasNext()) {
                     try {
                         Thread.sleep(5000);
@@ -100,8 +101,8 @@ public final class KafkaDataServiceImpl {
                         streamingWord.setTopic("spark");
                         streamingWord.setWord(next._1);
                         streamingWord.setCount(next._2);
-                        hbase.insertData("streamingTest1", streamingWord);
-//                        mysql.saveStreaming(streamingWord);
+                        kudu.insertData("streamingTest",streamingWord);
+//                        hbase.insertData("streamingTest", streamingWord);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
