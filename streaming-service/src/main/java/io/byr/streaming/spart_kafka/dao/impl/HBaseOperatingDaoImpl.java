@@ -23,13 +23,13 @@ import java.util.List;
 @Slf4j
 @Repository("HBase")
 public class HBaseOperatingDaoImpl implements HBaseOperatingDao {
-    private static Admin admin;
     @Autowired
     private Connection connection;
+    @Autowired
+    private Admin admin;
     @Override
     public void createTable(String tableName, String[] columnArray) throws IOException {
         TableName tableNameNew = TableName.valueOf(tableName);
-        admin = connection.getAdmin();
         try {
             if (admin.tableExists(tableNameNew)) {
                 log.warn("表已经存在！");
@@ -49,6 +49,9 @@ public class HBaseOperatingDaoImpl implements HBaseOperatingDao {
     @Override
     public void insertData(String tableName, StreamingWord streamingWord) throws IOException {
         createTable(tableName, new String[]{"StreamingWord"});
+
+
+
         TableName tablename = TableName.valueOf(tableName);
         String count=String.valueOf(streamingWord.getCount());
         try {
@@ -70,6 +73,7 @@ public class HBaseOperatingDaoImpl implements HBaseOperatingDao {
         List<StreamingWord> list = new ArrayList<StreamingWord>();
         try {
             table = connection.getTable(TableName.valueOf(tableName));
+
             ResultScanner results = table.getScanner(new Scan());
             StreamingWord streamingWord = null;
             for (Result result : results) {
@@ -108,6 +112,7 @@ public class HBaseOperatingDaoImpl implements HBaseOperatingDao {
         if (!get.isCheckExistenceOnly()) {
             Result result = table.get(get);
             for (Cell cell : result.rawCells()) {
+
                 String colName = Bytes.toString(cell.getQualifierArray(), cell.getQualifierOffset(), cell.getQualifierLength());
                 String value = Bytes.toString(cell.getValueArray(), cell.getValueOffset(), cell.getValueLength());
                 if (colName.equals("word")) {

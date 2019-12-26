@@ -6,12 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="produce_io" />
+        <module name="produce-io" />
         <module name="streaming-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="produce_io" target="1.8" />
+      <module name="produce-io" target="1.8" />
       <module name="streaming-service" target="1.8" />
     </bytecodeTargetLevel>
   </component>

@@ -82,6 +82,20 @@
 			</exclusions>
 		</dependency>
 
+
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-hadoop</artifactId>
+			<version>2.2.1.RELEASE-hadoop26</version>
+			<!--<exclusions>-->
+			<!--<exclusion>-->
+			<!--<groupId>org.apache.hadoop</groupId>-->
+			<!--<artifactId>hadoop-common</artifactId>-->
+			<!--</exclusion>-->
+			<!--</exclusions>-->
+		</dependency>
+
 		<!--scala依赖-->
 		<dependency>
 			<groupId>org.scala-lang</groupId>

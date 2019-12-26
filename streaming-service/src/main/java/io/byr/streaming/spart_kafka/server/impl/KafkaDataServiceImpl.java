@@ -59,6 +59,7 @@ public final class KafkaDataServiceImpl {
         TOPIC = topics;
         SparkConf sparkConf = new SparkConf().setMaster("local[*]").setAppName("JavaDirectKafkaDataService");
         JavaStreamingContext jssc = new JavaStreamingContext(sparkConf, Durations.seconds(2));
+
         Set<String> topicsSet = new HashSet<>(Arrays.asList(topics.split(",")));
         Map<String, Object> kafkaParams = new HashMap<>();
         kafkaParams.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, brokers);

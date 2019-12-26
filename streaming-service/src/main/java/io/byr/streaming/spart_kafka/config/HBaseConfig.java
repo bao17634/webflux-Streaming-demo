@@ -2,6 +2,7 @@ package io.byr.streaming.spart_kafka.config;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
+import org.apache.hadoop.hbase.client.Admin;
 import org.apache.hadoop.hbase.client.Connection;
 import org.apache.hadoop.hbase.client.ConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,10 @@ public class HBaseConfig {
             throw new RuntimeException(e);
         }
         return connection;
+    }
+    @Bean
+    public Admin getAdmin() throws IOException {
+        Admin admin=this.connection().getAdmin();
+        return admin;
     }
 }

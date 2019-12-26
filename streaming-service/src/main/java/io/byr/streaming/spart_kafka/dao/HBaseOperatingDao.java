@@ -69,7 +69,6 @@ public interface HBaseOperatingDao {
 
     /**
      * 删除指定cell数据
-     *
      * @param tableName
      * @param rowKey
      * @return

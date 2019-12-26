@@ -1,0 +1,6 @@
+hbase:
+  serverIp: localhost
+  serverPort: 2182
+zookeeper:
+  znode:
+    parent: /hbase-unsecure

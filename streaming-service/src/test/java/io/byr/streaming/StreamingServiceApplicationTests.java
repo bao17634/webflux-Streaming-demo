@@ -11,6 +11,7 @@ public class StreamingServiceApplicationTests {
 
 	@Test
 	public void contextLoads() {
+
 	}
 
 }
